@@ -1,0 +1,81 @@
+<head>
+<meta name="viewport" content="width=device-width, height=device-height" />
+<title>Planning Tool Abano</title>
+
+<script src=""></script>
+</head>
+<body>
+	<div class="container">
+		<header>
+			<a href="/"> <img src="/assets/images/abano_Logo.png" alt="">
+			</a>
+			<h1>Planning Tool</h1>
+			<nav>
+				<a href="#" id="menu_icon"><i class="fa fa-bars"
+					aria-hidden="true"></i><span>home</span></a>
+				<ul>
+					<li><a routerLink="/">Home</a></li>
+					<li><a routerLink="/Login" class="active">Log in</a></li>
+				</ul>
+			</nav>
+			<div class="fix"></div>
+		</header>
+
+		<main> <!-- content here --> <br>
+		<h2>Please log in below</h2>
+		<form id="LoginForm" [formGroup]="adminloginForm" #formDir="ngForm">
+			<fieldset>
+				<legend>Log In</legend>
+				<ul>
+					<li class="form-group"><label for="username">User
+							name:</label><br> <input [(ngModel)]="user.username" type="text"
+						name="username" id="username" placeholder="Username"
+						formControlName="username" required>
+						<div
+							*ngIf="username.invalid && (username.dirty || username.touched)"
+							class="alert alert-danger">
+							<span style="color: red" *ngIf="username.errors.required">username
+								is required</span>
+						</div>
+						<span style="color: red" *ngIf="username.valid">{{errorUsername}}</span></li>
+
+					<li><br></li>
+
+					<li class="form-group"><label for="password">Password:</label><br>
+						<input [(ngModel)]="user.password" type="password" name="password"
+						id="password" placeholder="Password" formControlName="password"
+						required>
+						<div
+							*ngIf="password.invalid && (password.dirty || password.touched)"
+							class="alert alert-danger">
+							<span style="color: red" *ngIf="password.errors.required">password
+								is required</span>
+						</div>
+						<span style="color: red" *ngIf="password.valid">{{errorPassword}}</span></li>
+
+					<li class="form-group"><input name="login" id="login"
+						type="submit" placeholder="login" [disabled]="adminloginForm.invalid"
+						(click)="loginAdmin()">
+						<div class="fix"></div></li>
+				</ul>
+			</fieldset>
+		</form>
+
+
+		</main>
+
+		<footer>
+			<ul id="address">
+				<li>Veltkant 33a</li>
+				<li>2550 Kontich</li>
+				<li>Belgium</li>
+				<li>Tel: +32 (0)475 27 43 57</li>
+				<li>&nbsp;</li>
+				<li>Copyright &copy; <script>
+					document.write(new Date().getFullYear());
+				</script> - Giel Blockx &#124;
+				</li>
+			</ul>
+		</footer>
+	</div>
+</body>
