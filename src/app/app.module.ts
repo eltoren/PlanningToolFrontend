@@ -3,6 +3,8 @@ import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule, Routes} from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {CalendarModule} from 'angular-calendar';
 
 
 import {AppRoutingModules} from './app-routing.module';
@@ -29,7 +31,9 @@ import {AdminloginService} from './login/adminlogin/adminlogin.service';
     AppRoutingModules,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    CalendarModule.forRoot(),
   ],
   providers: [LoginService, AdminloginService],
   bootstrap: [AppComponent]
