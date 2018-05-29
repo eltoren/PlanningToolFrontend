@@ -67,6 +67,13 @@
 							for="end"> {{ modalData.event.end | date : "dd-MM-yyyy"
 								}}</label> <input [(ngModel)]="modalData.event.end" type="date"
 							name="end"></li>
+						<li class="form-group"><label for="projectName">Project
+								Name: </label> <select [(ngModel)]="modalData.event.meta.projectList"
+							id="projectsArray">
+								<option value="" disabled selected>>select a project</option>
+								<option *ngFor="let item of projectList.allProjects"
+									[value]="item.projectName">{{item.projectName}}</option>
+						</select></li>
 					</ul>
 				</fieldset>
 			</div>
@@ -118,6 +125,7 @@
 					<!-- 					<th>Secondary color</th> -->
 					<th>Starts at</th>
 					<th>Ends at</th>
+					<th>Project Name</th>
 					<th>Remove</th>
 				</tr>
 			</thead>
@@ -128,14 +136,20 @@
 						[(ngModel)]="event.title" (keyup)="refresh.next()"></td>
 					<td><input type="color" [(ngModel)]="event.color.primary"
 						(change)="refresh.next()"></td>
-					<td><input type="color" [(ngModel)]="event.color.secondary"
-						(change)="refresh.next()"></td>
+					<!-- <td><input type="color" [(ngModel)]="event.color.secondary"
+						(change)="refresh.next()"></td> -->
 					<td><mwl-demo-utils-date-time-picker [(ngModel)]="event.start"
 							(ngModelChange)="refresh.next()" placeholder="Not set">
 						</mwl-demo-utils-date-time-picker></td>
 					<td><mwl-demo-utils-date-time-picker [(ngModel)]="event.end"
 							(ngModelChange)="refresh.next()" placeholder="Not set">
 						</mwl-demo-utils-date-time-picker></td>
+					<td><select [(ngModel)]="event.meta.projectList"
+						id="projectsArray">
+							<option value="" disabled selected>>select a project</option>
+							<option *ngFor="let item of projectList.allProjects"
+								[value]="item.projectName">{{item.projectName}}</option>
+					</select></td>
 					<td>
 						<button class="btn btn-danger"
 							(click)="events.splice(index, 1); refresh.next()">

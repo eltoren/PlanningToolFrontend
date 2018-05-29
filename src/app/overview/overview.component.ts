@@ -5,6 +5,11 @@ import {Subject} from 'rxjs';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent} from 'angular-calendar';
 
+import {Users} from '../models/users.model';
+import {Projects} from '../models/projects.model';
+import {ProjectsList} from '../models/ProjectsList.model'
+import {ProjectsService} from './projects.service'
+
 const colors: any = {
   red: {
     primary: '#ad2121',
@@ -37,6 +42,11 @@ export class OverviewComponent {
 
   viewDate: Date = new Date();
 
+  project: Projects;
+  projectList: ProjectsList = new ProjectsList();
+  projectsArray = [];
+
+
   modalData: {
     action: string;
     event: CalendarEvent;
@@ -60,43 +70,43 @@ export class OverviewComponent {
 
   refresh: Subject<any> = new Subject();
 
-  events: CalendarEvent[] = [
-//    {
-//      start: subDays(startOfDay(new Date()), 1),
-//      end: addDays(new Date(), 1),
-//      title: 'A 3 day event',
-//      color: colors.red,
-//      actions: this.actions
-//    },
-//    {
-//      start: startOfDay(new Date()),
-//      title: 'An event with no end date',
-//      color: colors.yellow,
-//      actions: this.actions
-//    },
-//    {
-//      start: subDays(endOfMonth(new Date()), 3),
-//      end: addDays(endOfMonth(new Date()), 3),
-//      title: 'A long event that spans 2 months',
-//      color: colors.blue
-//    },
-//    {
-//      start: addHours(startOfDay(new Date()), 2),
-//      end: new Date(),
-//      title: 'A draggable and resizable event',
-//      color: colors.yellow,
-//      actions: this.actions,
-//      resizable: {
-//        beforeStart: true,
-//        afterEnd: true
-//      },
-//      draggable: true
-//    }
+  events: Array<CalendarEvent<{project: Projects, projectList: ProjectsList}>> = [
+    //    {
+    //      start: subDays(startOfDay(new Date()), 1),
+    //      end: addDays(new Date(), 1),
+    //      title: 'A 3 day event',
+    //      color: colors.red,
+    //      actions: this.actions
+    //    },
+    //    {
+    //      start: startOfDay(new Date()),
+    //      title: 'An event with no end date',
+    //      color: colors.yellow,
+    //      actions: this.actions
+    //    },
+    //    {
+    //      start: subDays(endOfMonth(new Date()), 3),
+    //      end: addDays(endOfMonth(new Date()), 3),
+    //      title: 'A long event that spans 2 months',
+    //      color: colors.blue
+    //    },
+    //    {
+    //      start: addHours(startOfDay(new Date()), 2),
+    //      end: new Date(),
+    //      title: 'A draggable and resizable event',
+    //      color: colors.yellow,
+    //      actions: this.actions,
+    //      resizable: {
+    //        beforeStart: true,
+    //        afterEnd: true
+    //      },
+    //      draggable: true
+    //    }
   ];
 
   activeDayIsOpen: boolean = true;
 
-  constructor(private modal: NgbModal, private router: Router, ) {}
+  constructor(private modal: NgbModal, private router: Router, private projectsService: ProjectsService) {}
 
   dayClicked({date, events}: {date: Date; events: CalendarEvent[]}): void {
     if (isSameMonth(date, this.viewDate)) {
@@ -129,15 +139,34 @@ export class OverviewComponent {
   }
 
   addEvent(): void {
+    this.project = new Projects;
+    this.project.setProjectName('New Project');
     this.events.push({
       title: 'New event',
       start: startOfDay(new Date()),
       end: endOfDay(new Date()),
       color: colors.red,
       draggable: true,
-      actions: this.actions
+      actions: this.actions,
+
+      meta: {
+        project: this.project,
+        projectList: this.getAllProjects()
+      }
     });
     this.refresh.next();
   }
+
+  getAllProjects(): ProjectsList {
+    this.projectsService.getProjects(this.projectList).subscribe(data => {
+      data.allProjects.forEach((projects) => {
+        console.log(projects);
+        this.projectList.allProjects.push(projects);
+      })
+    });
+    console.log(this.projectList);
+    return this.projectList;
+  }
+
 
 }

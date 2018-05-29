@@ -15,6 +15,7 @@ import {AdminloginComponent} from './login/adminlogin/adminlogin.component';
 
 import {LoginService} from './login/login/login.service';
 import {AdminloginService} from './login/adminlogin/adminlogin.service';
+import {ProjectsService} from './overview/projects.service'
 
 
 @NgModule({
@@ -33,7 +34,7 @@ import {AdminloginService} from './login/adminlogin/adminlogin.service';
     BrowserAnimationsModule,
     OverviewModule,
   ],
-  providers: [LoginService, AdminloginService],
+  providers: [LoginService, AdminloginService, ProjectsService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
