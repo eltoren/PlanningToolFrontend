@@ -69,7 +69,7 @@
 							name="end"></li>
 						<li class="form-group"><label for="projectName">Project
 								Name: </label> <select [(ngModel)]="modalData.event.meta.projectList"
-							id="projectsArray">
+							id="projectList">
 								<option value="" disabled selected>>select a project</option>
 								<option *ngFor="let item of projectList.allProjects"
 									[value]="item.projectName">{{item.projectName}}</option>

@@ -12,15 +12,13 @@ const httpOptions = {
 @Injectable()
 export class ProjectsService {
 
-  private userUrl = 'http://localhost:8080/Projects';
+  private projectsUrl = 'http://localhost:8080/Projects';
 
   constructor(private http: HttpClient) {}
 
   public getProjects(projectList) {
-    return this.http.post<ProjectsList>(this.userUrl, projectList);
+    return this.http.post<ProjectsList>(this.projectsUrl, projectList);
   }
 
-  public addProject(project) {
-    this.http.post<Projects>(this.userUrl, project);
-  }
+  
 }

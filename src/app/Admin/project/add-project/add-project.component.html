@@ -1,0 +1,120 @@
+<head>
+<meta name="viewport" content="width=device-width, height=device-height" />
+<title>Planning Tool Abano</title>
+
+<script src=""></script>
+</head>
+<body>
+	<div class="container">
+		<header>
+			<a href="/"> <img src="/assets/images/abano_Logo.png" alt="">
+			</a>
+			<h1>Planning Tool</h1>
+			<nav>
+				<a href="#" id="menu_icon"><i class="fa fa-bars"
+					aria-hidden="true"></i><span>home</span></a>
+				<ul>
+					<li><a routerLink="">Home</a></li>
+					<li><a routerLink="/adminOverview">Overview</a></li>
+					<li><a routerLink="../adminAddUser">Add User</a></li>
+					<li><a class="active">Add Project</a></li>
+					<li><a routerLink="../adminAddCustomer">Add Customer</a></li>
+				</ul>
+			</nav>
+			<div class="fix"></div>
+		</header>
+
+		<main> <!-- content here --> <br>
+		<h2>Please fill in the form below to add a new Project</h2>
+		<br>
+		<form id="addProjectsForm" [formGroup]="addProjectsForm"
+			#formDir="ngForm">
+			<fieldset>
+				<legend>Add projects</legend>
+				<ul>
+					<li class="form-group"><label for="projectName">Project
+							name:</label><br> <input [(ngModel)]="project.projectName"
+						type="text" name="projectName" id="projectName"
+						placeholder="projectName" formControlName="projectName" required>
+						<div
+							*ngIf="projectName.invalid && (projectName.dirty || projectName.touched)"
+							class="alert alert-danger">
+							<span style="color: red" *ngIf="projectName.errors.required">project
+								name is required</span>
+						</div></li>
+
+					<li><br></li>
+
+					<li class="form-group"><label for="projectOwner">customers
+							Names: </label> <select [(ngModel)]="project.projectOwner" id="projectOwner"
+						formControlName="projectOwner">
+							<option value="" disabled selected>select the owner of the project:</option>
+							<option *ngFor="let item of customersList.allCustomers"
+								[value]="item">{{item.customerName}}</option>
+					</select></li>
+
+
+					<li><br></li>
+
+					<li class="form-group"><label for="usersOnProject">user
+							Names: </label> <select [(ngModel)]="project.usersOnProject" id="usersOnProject"
+						formControlName="usersOnProject">
+							<option value="" disabled selected>select user for this project:</option>
+							<option *ngFor="let item of usersList.allUsers"
+								[value]="item">{{item.firstName}}</option>
+					</select></li>
+
+					<li><br></li>
+
+					<li class="form-group"><label for="startDate">start
+							date:</label><br> <input [(ngModel)]="project.startDate" type="date"
+						name="startDate" id="startDate" placeholder="startDate"
+						formControlName="startDate" required>
+						<div
+							*ngIf="startDate.invalid && (startDate.dirty || startDate.touched)"
+							class="alert alert-danger">
+							<span style="color: red" *ngIf="startDate.errors.required">password
+								is required</span>
+						</div></li>
+
+					<li><br></li>
+
+					<li class="form-group"><label for="endDate">end date:</label><br>
+						<input [(ngModel)]="project.endDate" type="date" name="endDate"
+						id="endDate" placeholder="endDate" formControlName="endDate">
+					</li>
+
+					<li><br></li>
+
+					<li>usersOnProject?</li>
+
+					<li><br></li>
+
+					<li class="form-group"><input name="addProject"
+						id="addProject" type="submit" placeholder="Add new project"
+						[disabled]="addProjectsForm.invalid" (click)="addPrjoject()">
+						<div class="fix"></div></li>
+
+				</ul>
+			</fieldset>
+		</form>
+
+
+
+		</main>
+
+		<footer>
+			<ul id="address">
+				<li>Veltkant 33a</li>
+				<li>2550 Kontich</li>
+				<li>Belgium</li>
+				<li>Tel: +32 (0)475 27 43 57</li>
+				<li>&nbsp;</li>
+				<li>Copyright &copy; <script>
+					document.write(new Date().getFullYear());
+				</script> - Giel Blockx &#124; <a routerLink="../adminlogin"> Admin Login</a>
+				</li>
+			</ul>
+		</footer>
+	</div>
+</body>

@@ -43,7 +43,7 @@ export class AdminloginComponent implements OnInit {
         } else if (data.admin === false) {
           this.errorAdmin = 'this user is not an admin!';
         } else {
-          this.router.navigateByUrl('overview');
+          this.router.navigateByUrl('adminOverview');
         }
       });
 
