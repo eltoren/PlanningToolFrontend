@@ -1,4 +1,4 @@
-import {Component, ChangeDetectionStrategy, ViewChild, TemplateRef} from '@angular/core';
+import {Component, ChangeDetectionStrategy, ViewChild, TemplateRef, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours} from 'date-fns';
 import {Subject} from 'rxjs';
@@ -8,7 +8,7 @@ import {CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent} from
 import {Users} from '../models/users.model';
 import {Projects} from '../models/projects.model';
 import {ProjectsList} from '../models/ProjectsList.model'
-import {ProjectsService} from './projects.service'
+import {OverviewService} from './Overview.service'
 
 const colors: any = {
   red: {
@@ -35,8 +35,17 @@ const colors: any = {
     '../reset.css'
   ]
 })
-export class OverviewComponent {
+export class OverviewComponent implements OnInit {
+
+  ngOnInit(): void {
+    this.getAllProjects();
+    setTimeout(() => this.addexistingProjects(), 3000);
+
+  }
+
   @ViewChild('modalContent') modalContent: TemplateRef<any>;
+
+  currentUser: Users;
 
   view: string = 'month';
 
@@ -57,6 +66,7 @@ export class OverviewComponent {
       label: '<i class="fa fa-fw fa-pencil"></i>',
       onClick: ({event}: {event: CalendarEvent}): void => {
         this.handleEvent('Edited', event);
+        this.projectsService.addProjects(this.project).subscribe((data) => {});
       }
     },
     {
@@ -71,25 +81,9 @@ export class OverviewComponent {
   refresh: Subject<any> = new Subject();
 
   events: Array<CalendarEvent<{project: Projects, projectList: ProjectsList}>> = [
-    //    {
-    //      start: subDays(startOfDay(new Date()), 1),
-    //      end: addDays(new Date(), 1),
-    //      title: 'A 3 day event',
-    //      color: colors.red,
-    //      actions: this.actions
-    //    },
-    //    {
-    //      start: startOfDay(new Date()),
-    //      title: 'An event with no end date',
-    //      color: colors.yellow,
-    //      actions: this.actions
-    //    },
-    //    {
-    //      start: subDays(endOfMonth(new Date()), 3),
-    //      end: addDays(endOfMonth(new Date()), 3),
-    //      title: 'A long event that spans 2 months',
-    //      color: colors.blue
-    //    },
+
+
+
     //    {
     //      start: addHours(startOfDay(new Date()), 2),
     //      end: new Date(),
@@ -103,10 +97,9 @@ export class OverviewComponent {
     //      draggable: true
     //    }
   ];
-
   activeDayIsOpen: boolean = true;
 
-  constructor(private modal: NgbModal, private router: Router, private projectsService: ProjectsService) {}
+  constructor(private modal: NgbModal, private router: Router, private projectsService: OverviewService) {this.currentUser = JSON.parse(localStorage.getItem('currentUser'));}
 
   dayClicked({date, events}: {date: Date; events: CalendarEvent[]}): void {
     if (isSameMonth(date, this.viewDate)) {
@@ -141,8 +134,10 @@ export class OverviewComponent {
   addEvent(): void {
     this.project = new Projects;
     this.project.setProjectName('New Project');
+    this.project.startDate = new Date();
+    this.project.endDate = new Date();
     this.events.push({
-      title: 'New event',
+      title: this.project.projectName,
       start: startOfDay(new Date()),
       end: endOfDay(new Date()),
       color: colors.red,
@@ -155,17 +150,38 @@ export class OverviewComponent {
       }
     });
     this.refresh.next();
+
   }
 
   getAllProjects(): ProjectsList {
-    this.projectsService.getProjects(this.projectList).subscribe(data => {
+    console.log(this.currentUser);
+    this.projectsService.getProjects(this.currentUser).subscribe(data => { //getProjectsFromUser
       data.allProjects.forEach((projects) => {
-        console.log(projects);
         this.projectList.allProjects.push(projects);
-      })
+      });
+
     });
-    console.log(this.projectList);
     return this.projectList;
+  }
+
+  addexistingProjects(): void {
+    this.projectList.allProjects.forEach((project) => {
+      this.events.push({
+        title: project.projectName,
+        start: new Date(project.startDate),
+        end: new Date(project.endDate),
+        color: colors.red,
+        draggable: true,
+        actions: this.actions,
+
+        meta: {
+          project: project,
+          projectList: this.projectList
+        }
+      });
+
+      this.refresh.next();
+    });
   }
 
 

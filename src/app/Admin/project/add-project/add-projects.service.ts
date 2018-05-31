@@ -21,6 +21,7 @@ export class AddProjectsService {
   constructor(private http: HttpClient) {}
   
   public addProject(project) {
+    console.log(project)
     return this.http.post<Projects>(this.projecttUrl, project);
   }
   

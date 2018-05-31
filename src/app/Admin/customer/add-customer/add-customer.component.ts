@@ -10,9 +10,9 @@ import {AddCustomersService} from './add-customers.service';
   selector: 'app-add-customer',
   templateUrl: './add-customer.component.html',
   styleUrls: ['./add-customer.component.css',
-    '../../main.css',
-    '../../reset.css',
-    '../../form.css']
+    '../../../main.css',
+    '../../../reset.css',
+    '../../../form.css']
 })
 export class AddCustomerComponent implements OnInit {
 

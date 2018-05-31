@@ -16,14 +16,23 @@ import {AdminOverviewComponent} from './Admin/admin-overview/admin-overview.comp
 import {AddUserComponent} from './Admin/user/add-user/add-user.component';
 import {AddCustomerComponent} from './Admin/customer/add-customer/add-customer.component';
 import {AddProjectComponent} from './Admin/project/add-project/add-project.component';
+import {UserOverviewComponent} from './Admin/user/user-overview/user-overview.component'
+import {ProjectOverviewComponent} from './Admin/project/project-overview/project-overview.component';
+import {CustomersOverviewComponent} from './Admin/customer/customers-overview/customers-overview.component';
+import {EditUserComponent} from './Admin/user/edit-user/edit-user.component';
 
 
 import {LoginService} from './login/login/login.service';
 import {AdminloginService} from './login/adminlogin/adminlogin.service';
-import {ProjectsService} from './overview/projects.service';
+import {OverviewService} from './overview/Overview.service';
 import {AddUserService} from './Admin/user/add-user/add-user.service'
 import {AddProjectsService} from './Admin/project/add-project/add-projects.service'
-import {AddCustomersService} from './Admin/customer/add-customer/add-customers.service'
+import {AddCustomersService} from './Admin/customer/add-customer/add-customers.service';
+import {EditUserService} from './Admin/user/edit-user/edit-user.service'
+
+
+
+
 
 
 @NgModule({
@@ -36,6 +45,10 @@ import {AddCustomersService} from './Admin/customer/add-customer/add-customers.s
     AddCustomerComponent,
     AddProjectComponent,
     AdminOverviewComponent,
+    UserOverviewComponent,
+    ProjectOverviewComponent,
+    CustomersOverviewComponent,
+    EditUserComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,10 +61,10 @@ import {AddCustomersService} from './Admin/customer/add-customer/add-customers.s
   ],
   providers: [LoginService,
     AdminloginService,
-    ProjectsService,
-    AddUserService,
-    AddProjectsService,
-    AddCustomersService],
+    OverviewService,
+    AddUserService, AddProjectsService, AddCustomersService, 
+    EditUserService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

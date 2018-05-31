@@ -15,10 +15,10 @@
 					aria-hidden="true"></i><span>home</span></a>
 				<ul>
 					<li><a routerLink="">Home</a></li>
-					<li><a routerLink="/adminOverview">Overview</a></li>
-					<li><a routerLink="../adminAddUser">Add User</a></li>
+					<li><a routerLink="/adminOverview">back</a></li>
+					<li><a routerLink="../">Overview</a></li>
 					<li><a class="active">Add Project</a></li>
-					<li><a routerLink="../adminAddCustomer">Add Customer</a></li>
+
 				</ul>
 			</nav>
 			<div class="fix"></div>
@@ -83,10 +83,6 @@
 						<input [(ngModel)]="project.endDate" type="date" name="endDate"
 						id="endDate" placeholder="endDate" formControlName="endDate">
 					</li>
-
-					<li><br></li>
-
-					<li>usersOnProject?</li>
 
 					<li><br></li>
 

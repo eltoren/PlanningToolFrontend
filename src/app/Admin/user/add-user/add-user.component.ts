@@ -10,9 +10,9 @@ import {AddUserService} from './add-user.service';
   selector: 'app-add-user',
   templateUrl: './add-user.component.html',
   styleUrls: ['./add-user.component.css',
-    '../../main.css',
-    '../../reset.css',
-    '../../form.css']
+    '../../../main.css',
+    '../../../reset.css',
+    '../../../form.css']
 })
 export class AddUserComponent implements OnInit {
 

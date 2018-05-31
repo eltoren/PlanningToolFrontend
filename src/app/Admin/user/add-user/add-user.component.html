@@ -15,10 +15,10 @@
 					aria-hidden="true"></i><span>home</span></a>
 				<ul>
 					<li><a routerLink="">Home</a></li>
-					<li><a routerLink="/adminOverview">Overview</a></li>
+					<li><a routerLink="/adminOverview">back</a></li>
+					<li><a routerLink="../">Overview</a></li>
 					<li><a class="active">Add User</a></li>
-					<li><a routerLink="../adminAddProject">Add Project</a></li>
-					<li><a routerLink="../adminAddCustomer">Add Customer</a></li>
+					<li><a routerLink="../adminEditUser">Edit user</a></li>
 				</ul>
 			</nav>
 			<div class="fix"></div>
@@ -90,20 +90,19 @@
 					<li><br></li>
 
 					<li class="form-group"><label for="functions">functions
-					:</label><br> <input [(ngModel)]="user.functions" type="text"
+							:</label><br> <input [(ngModel)]="user.functions" type="text"
 						name="functions" id="functions" placeholder="functions"
-						formControlName="functions">
-						</li>
+						formControlName="functions"></li>
 
 					<li><br></li>
 
 					<li class="form-group"><label for="projectList">Project
-								Names: </label> <select [(ngModel)]="user.projects"
-							id="projectList" formControlName="projects">
-								<option value="" disabled selected>select a project</option>
-								<option *ngFor="let item of projectList.allProjects"
-									[value]="item">{{item.projectName}}</option>
-						</select></li>
+							Names: </label> <select [(ngModel)]="user.projects" id="projectList"
+						formControlName="projects">
+							<option value="" disabled selected>select a project</option>
+							<option *ngFor="let item of projectList.allProjects"
+								[value]="item">{{item.projectName}}</option>
+					</select></li>
 
 					<li><br></li>
 

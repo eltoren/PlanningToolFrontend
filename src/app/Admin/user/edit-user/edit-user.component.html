@@ -1,0 +1,156 @@
+<head>
+<meta name="viewport" content="width=device-width, height=device-height" />
+<title>Planning Tool Abano</title>
+
+<script src=""></script>
+</head>
+<body>
+	<div class="container">
+		<header>
+			<a href="/"> <img src="/assets/images/abano_Logo.png" alt="">
+			</a>
+			<h1>Planning Tool</h1>
+			<nav>
+				<a href="#" id="menu_icon"><i class="fa fa-bars"
+					aria-hidden="true"></i><span>home</span></a>
+				<ul>
+					<li><a routerLink="">Home</a></li>
+					<li><a routerLink="/adminOverview">back</a></li>
+					<li><a routerLink="../">Overview</a></li>
+					<li><a routerLink="../adminAddUser">Add User</a></li>
+					<li><a class="active">Edit user</a></li>
+				</ul>
+			</nav>
+			<div class="fix"></div>
+		</header>
+
+		<main> <!-- content here --> <br>
+		<h2>Please select a user below to edit him</h2>
+		<br>
+		
+		<form id="selectUserForm" [formGroup]="selectUserForm" #formDir="ngForm">
+			<fieldset>
+				<legend>select user</legend>
+				<ul>
+					<li class="form-group"><label for="userList">users:
+							</label> <select [(ngModel)]="tempUser" id="userList"
+						formControlName="userList">
+							<option value="" disabled selected>select a User</option>
+							<option *ngFor="let item of userList.allUsers"
+								[value]="item">{{item.username}}</option>
+					</select></li>
+					<li class="form-group"><input name="selectUser" id="selectUser"
+						type="submit" placeholder="Select this User"
+						(click)="getUser()">
+						<div class="fix"></div></li>
+				</ul>
+			</fieldset>		
+		</form>
+		
+		<form id="editUserForm" [formGroup]="editUserForm" #formDir="ngForm">
+			<fieldset>
+				<legend>edit user</legend>
+				<ul>
+					<li class="form-group"><label for="firstName">User
+							first name:</label><br> <input [(ngModel)]="user.firstName"
+						type="text" name="firstName" id="firstName"
+						placeholder="firstName" formControlName="firstName" required>
+						<div
+							*ngIf="firstName.invalid && (firstName.dirty || firstName.touched)"
+							class="alert alert-danger">
+							<span style="color: red" *ngIf="firstName.errors.required">first
+								name is required</span>
+						</div></li>
+
+					<li><br></li>
+
+					<li class="form-group"><label for="lastName">User last
+							name:</label><br> <input [(ngModel)]="user.lastName" type="text"
+						name="lastName" id="lastName" placeholder="lastName"
+						formControlName="lastName" required>
+						<div
+							*ngIf="lastName.invalid && (lastName.dirty || lastName.touched)"
+							class="alert alert-danger">
+							<span style="color: red" *ngIf="lastName.errors.required">last
+								name is required</span>
+						</div></li>
+
+					<li><br></li>
+
+					<li class="form-group"><label for="username">User
+							name:</label><br> <input [(ngModel)]="user.username" type="text"
+						name="username" id="username" placeholder="Username"
+						formControlName="username" required>
+						<div
+							*ngIf="username.invalid && (username.dirty || username.touched)"
+							class="alert alert-danger">
+							<span style="color: red" *ngIf="username.errors.required">username
+								is required</span>
+						</div></li>
+
+					<li><br></li>
+
+					<li class="form-group"><label for="password">Password:</label><br>
+						<input [(ngModel)]="user.password" type="password" name="password"
+						id="password" placeholder="Password" formControlName="password"
+						required>
+						<div
+							*ngIf="password.invalid && (password.dirty || password.touched)"
+							class="alert alert-danger">
+							<span style="color: red" *ngIf="password.errors.required">password
+								is required</span>
+						</div></li>
+
+					<li><br></li>
+
+					<li class="form-group"><label for="admin">admin:</label><br>
+						<input [(ngModel)]="user.admin" type="checkbox" name="admin"
+						id="admin" placeholder="admin" formControlName="admin"><br></li>
+
+					<li><br></li>
+
+					<li class="form-group"><label for="functions">functions
+							:</label><br> <input [(ngModel)]="user.functions" type="text"
+						name="functions" id="functions" placeholder="functions"
+						formControlName="functions"></li>
+
+					<li><br></li>
+
+					<li class="form-group"><label for="projectList">Project
+							Names: </label> <select [(ngModel)]="user.projects" id="projectList"
+						formControlName="projects">
+							<option value="" disabled="disabled" selected="selected">select a project</option>
+							<option *ngFor="let item of projectList.allProjects"
+								[value]="item">{{item.projectName}}</option>
+					</select></li>
+
+					<li><br></li>
+
+					<li class="form-group"><input name="addUser" id="addUser"
+						type="submit" placeholder="Add new user"
+						[disabled]="editUserForm.invalid" (click)="saveEditUser()">
+						<div class="fix"></div></li>
+
+				</ul>
+			</fieldset>
+		</form>
+
+
+
+		</main>
+
+		<footer>
+			<ul id="address">
+				<li>Veltkant 33a</li>
+				<li>2550 Kontich</li>
+				<li>Belgium</li>
+				<li>Tel: +32 (0)475 27 43 57</li>
+				<li>&nbsp;</li>
+				<li>Copyright &copy; <script>
+					document.write(new Date().getFullYear());
+				</script> - Giel Blockx &#124; <a routerLink="../adminlogin"> Admin Login</a>
+				</li>
+			</ul>
+		</footer>
+	</div>
+</body>

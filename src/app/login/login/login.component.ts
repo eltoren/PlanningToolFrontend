@@ -20,10 +20,13 @@ export class LoginComponent implements OnInit {
   user: Users = new Users();
   errorUsername: string;
   errorPassword: string;
+  
+  isLoginError : boolean = false;
 
   constructor(private router: Router, private loginService: LoginService) {}
 
   ngOnInit(): void {
+    localStorage.removeItem('currentUser');
     this.loginForm = new FormGroup({
       'username': new FormControl(this.user.username, Validators.required),
       'password': new FormControl(this.user.password, Validators.required)
@@ -40,6 +43,7 @@ export class LoginComponent implements OnInit {
           this.errorPassword = data.password;
           this.router.navigateByUrl('login');
         } else {
+          localStorage.setItem('currentUser', JSON.stringify(this.user))
           this.router.navigateByUrl('overview');
         }
       });
