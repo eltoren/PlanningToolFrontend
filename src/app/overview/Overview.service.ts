@@ -12,7 +12,7 @@ const httpOptions = {
 @Injectable()
 export class OverviewService {
 
-  private projectsListUrl = 'http://localhost:8080/Projects';
+  private projectsListUrl = 'http://localhost:8080/ProjectsList';
   private projectsListFromUserUrl = 'http://localhost:8080/Overview';
   private projectsUrl = 'http://localhost:8080/addProjects';
 

@@ -9,7 +9,6 @@ export class Projects {
   usersOnProject: Array<Users>;
   startDate: Date;
   endDate: Date;
-  
   setProjectName(name: string) {
     this.projectName = name;
   }

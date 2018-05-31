@@ -155,7 +155,7 @@ export class OverviewComponent implements OnInit {
 
   getAllProjects(): ProjectsList {
     console.log(this.currentUser);
-    this.projectsService.getProjects(this.currentUser).subscribe(data => { //getProjectsFromUser
+    this.projectsService.getProjectsFromUser(this.currentUser).subscribe(data => { //getProjectsFromUser
       data.allProjects.forEach((projects) => {
         this.projectList.allProjects.push(projects);
       });

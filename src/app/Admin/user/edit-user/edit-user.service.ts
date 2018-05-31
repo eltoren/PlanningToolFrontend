@@ -18,8 +18,8 @@ export class EditUserService {
 
   private editUserUrl = 'http://localhost:8080/editUsers';
   private saveUserUrl = 'http://localhost:8080/addUsers';
-  private userListUrl = 'http://localhost:8080/Users';
-  private projectsUrl = 'http://localhost:8080/Projects';
+  private userListUrl = 'http://localhost:8080/UsersList';
+  private projectsUrl = 'http://localhost:8080/ProjectsList';
 
   constructor(private http: HttpClient) {}
 

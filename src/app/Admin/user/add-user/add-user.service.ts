@@ -15,7 +15,7 @@ const httpOptions = {
 export class AddUserService {
 
   private userUrl = 'http://localhost:8080/addUsers';
-  private projectsUrl = 'http://localhost:8080/Projects';
+  private projectsUrl = 'http://localhost:8080/ProjectsList';
 
   constructor(private http: HttpClient) {}
 
