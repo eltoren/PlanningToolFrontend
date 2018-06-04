@@ -36,6 +36,7 @@ export class LoginComponent implements OnInit {
   loginUser(): void {
     this.loginService.login(this.user)
       .subscribe(data => {
+       
         if (data.password == null) {
           this.errorUsername = data.username;
           this.router.navigateByUrl('login');
@@ -43,7 +44,7 @@ export class LoginComponent implements OnInit {
           this.errorPassword = data.password;
           this.router.navigateByUrl('login');
         } else {
-          localStorage.setItem('currentUser', JSON.stringify(this.user))
+          localStorage.setItem('currentUser', JSON.stringify(data))
           this.router.navigateByUrl('overview');
         }
       });

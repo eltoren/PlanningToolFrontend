@@ -9,6 +9,6 @@ export class Users {
   firstName: string;
   lastName: string;
   functions: string;
-  projects: Array<Projects>;
+  projectsOfUser: Array<Projects>;
 
 }

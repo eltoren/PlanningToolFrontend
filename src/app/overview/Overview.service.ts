@@ -13,7 +13,6 @@ const httpOptions = {
 export class OverviewService {
 
   private projectsListUrl = 'http://localhost:8080/ProjectsList';
-  private projectsListFromUserUrl = 'http://localhost:8080/Overview';
   private projectsUrl = 'http://localhost:8080/addProjects';
 
   constructor(private http: HttpClient) {}
@@ -23,11 +22,7 @@ export class OverviewService {
   }
 
    public addProjects(project) {
-
     return this.http.post<Projects>(this.projectsListUrl, project);
   }
   
-  public getProjectsFromUser(user) {
-    return this.http.post<ProjectsList>(this.projectsListFromUserUrl, user);
-  }
 }

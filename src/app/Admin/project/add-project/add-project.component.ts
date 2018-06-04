@@ -53,7 +53,6 @@ export class AddProjectComponent implements OnInit {
   }
 
   addPrjoject(): void {
-    this.project.usersOnProject.push(this.user)
     this.addProjectsService.addProject(this.project).subscribe(data => {alert('project created')});
   }
   

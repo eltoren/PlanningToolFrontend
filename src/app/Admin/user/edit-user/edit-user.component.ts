@@ -49,7 +49,7 @@ export class EditUserComponent implements OnInit {
       'password': new FormControl(this.user.password, Validators.required),
       'admin': new FormControl(this.user.admin),
       'functions': new FormControl(this.user.functions),
-      'projects': new FormControl(this.user.projects),
+      'projects': new FormControl(this.user.projectsOfUser),
     });
 
     this.selectUserForm = new FormGroup({
