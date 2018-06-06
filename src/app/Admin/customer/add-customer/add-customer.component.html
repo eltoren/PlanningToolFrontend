@@ -49,7 +49,7 @@
 						id="projectsOfCustomer" formControlName="projectsOfCustomer" size="3"
 						multiple>
 							<option value="" disabled selected>select a project</option>
-							<option *ngFor="let item of allProjectList.allProjects"
+							<option *ngFor="let item of projectList.allProjects"
 								[ngValue]="item">{{item.projectName}}</option>
 					</select></li>
 
@@ -57,7 +57,7 @@
 
 					<li class="form-group"><input name="addCustomer"
 						id="addCustomer" type="submit" placeholder="Add new Customer"
-						[disabled]="addCustomersFrom.invalid" (click)="addCustomer()">
+						[disabled]="addCustomersFrom.invalid" (click)="addCustomer()" onClick="history.go(0)">
 						<div class="fix"></div></li>
 
 				</ul>

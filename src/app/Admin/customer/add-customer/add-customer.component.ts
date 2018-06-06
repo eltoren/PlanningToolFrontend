@@ -5,6 +5,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Customers} from '../../../models/customers.model';
 import {ProjectsList} from '../../../models/ProjectsList.model';
 import {Projects} from "../../../models/projects.model";
+import {Users} from "../../../models/users.model";
 import {AddCustomersService} from './add-customers.service';
 
 @Component({
@@ -23,7 +24,7 @@ export class AddCustomerComponent implements OnInit {
 
   errorCustomersName: string;
 
-  allProjectList: ProjectsList = new ProjectsList;
+  projectList: ProjectsList = new ProjectsList;
 
 
   constructor(private router: Router, private addCustomersService: AddCustomersService) {}
@@ -34,13 +35,13 @@ export class AddCustomerComponent implements OnInit {
       'projectsOfCustomer': new FormControl(this.customer.projectsOfCustomer),
     });
 
-    this.addCustomersService.getProjects(this.allProjectList).subscribe(data => {
+    this.addCustomersService.getProjects(this.projectList).subscribe(data => {
       data.allProjects.forEach((projects) => {
         if (projects.ownerOfProject == null) {
-          
-           this.allProjectList.allProjects.push(projects);
+
+          this.projectList.allProjects.push(projects);
         }
-       
+
       });
     });
   }
@@ -48,12 +49,12 @@ export class AddCustomerComponent implements OnInit {
 
 
   addCustomer(): void {
-    console.log(this.customer);
-    this.customer.projectsOfCustomer.forEach((project) => {project.ownerOfProject = this.customer})
-    this.addCustomersService.addCustomer(this.customer).subscribe(data => {console.log(data); alert('customer created')});
+    this.customer.projectsOfCustomer.forEach((project) => {project.usersOnProject = new Array<Users>()});
+    this.addCustomersService.addCustomer(this.customer).subscribe(data => {alert('customer created')});
   }
 
   get customerName() {return this.addCustomersFrom.get('customerName');}
+
   get projectsOfCustomer() {return this.addCustomersFrom.get('projectsOfCustomer');}
 
 }

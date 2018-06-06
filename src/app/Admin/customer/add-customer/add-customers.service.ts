@@ -19,7 +19,6 @@ export class AddCustomersService {
   constructor(private http: HttpClient) {}
 
   public addCustomer(customer) {
-    console.log(customer);
     return this.http.post<Customers>(this.customerUrl, customer);
   }
 
