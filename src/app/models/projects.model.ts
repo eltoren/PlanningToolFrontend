@@ -5,8 +5,8 @@ export class Projects {
 
   id: number;
   projectName: string;
-  projectOwner: Customers;
-  usersOnProject: Array<Users>;
+  ownerOfProject: Customers;
+  usersOnProject: Array<Users> = new Array;
   startDate: Date;
   endDate: Date;
   setProjectName(name: string) {

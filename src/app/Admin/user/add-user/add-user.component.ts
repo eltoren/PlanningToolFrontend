@@ -54,6 +54,6 @@ export class AddUserComponent implements OnInit {
   get password() {return this.addUserForm.get('password');}
   get admin() {return this.addUserForm.get('admin');}
   get functions() {return this.addUserForm.get('functions');}
-  get projects() {return this.addUserForm.get('projects')}
+  get projectsOfUser() {return this.addUserForm.get('projectsOfUser')}
 
 }

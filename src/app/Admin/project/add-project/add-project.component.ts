@@ -25,6 +25,7 @@ export class AddProjectComponent implements OnInit {
 
   errorProjectName: string;
 
+  allUsersList: UserList = new UserList();
   usersList: UserList = new UserList();
   customersList: CustomersList = new CustomersList();
 
@@ -33,15 +34,15 @@ export class AddProjectComponent implements OnInit {
   ngOnInit() {
     this.addProjectsForm = new FormGroup({
       'projectName': new FormControl(this.project.projectName, Validators.required),
-      'projectOwner': new FormControl(this.project.projectOwner),
-      'usersOnProject': new FormControl(this.project.usersOnProject),
+      'projectOwner': new FormControl(this.project.ownerOfProject),
+      'userList': new FormControl(this.usersList.allUsers),
       'startDate': new FormControl(this.project.startDate, Validators.required),
       'endDate': new FormControl(this.project.endDate),
     });
 
-    this.addProjectsService.getUsers(this.usersList).subscribe(data => {
+    this.addProjectsService.getUsers(this.allUsersList).subscribe(data => {
       data.allUsers.forEach(user => {
-        this.usersList.allUsers.push(user);
+        this.allUsersList.allUsers.push(user);
       })
     });
 
@@ -53,12 +54,15 @@ export class AddProjectComponent implements OnInit {
   }
 
   addPrjoject(): void {
+    this.usersList.allUsers.forEach((user) => {
+      this.project.usersOnProject.push(user)
+    });
     this.addProjectsService.addProject(this.project).subscribe(data => {alert('project created')});
   }
   
   get projectName() {return this.addProjectsForm.get('projectName');}
-  get projectOwner() {return this.addProjectsForm.get('projectOwner');}
-  get usersOnProject() {return this.addProjectsForm.get('usersOnProject');}
+  get ownerOfProject() {return this.addProjectsForm.get('ownerOfProject');}
+  get allUsers() {return this.addProjectsForm.get('usersList');}
   get startDate() {return this.addProjectsForm.get('startDate');}
   get endDate() {return this.addProjectsForm.get('endDate');}
 

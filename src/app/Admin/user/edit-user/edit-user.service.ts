@@ -15,17 +15,12 @@ const httpOptions = {
 @Injectable()
 export class EditUserService {
 
-
-  private editUserUrl = 'http://localhost:8080/editUsers';
   private saveUserUrl = 'http://localhost:8080/addUsers';
   private userListUrl = 'http://localhost:8080/UsersList';
   private projectsUrl = 'http://localhost:8080/ProjectsList';
 
   constructor(private http: HttpClient) {}
 
-  public getUser(user) {
-    return this.http.post<Users>(this.editUserUrl, user);
-  }
   
   public saveUser(user) {
     return this.http.post<Users>(this.saveUserUrl, user);

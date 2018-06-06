@@ -53,28 +53,19 @@ export class EditUserComponent implements OnInit {
     });
 
     this.selectUserForm = new FormGroup({
-      'userList': new FormControl(this.userList),
+      'user': new FormControl(this.user),
 
     });
 
-
-  }
-
-  getUser(user): void {
-    console.log(user);
-    this.userList.allUsers.forEach((users) => {
-      if (users === user) {
-        this.tempUser = users
-      }
-    });
 
   }
 
   saveEditUser(): void {
+    console.log(this.user)
     this.editUserService.saveUser(this.user).subscribe(data => {alert('user edited')});
   }
 
- // get tempUser() {return this.selectUserForm.get('tempUser');}
+  get selecedUser() {return this.selectUserForm.get('user');}
 
   get firstName() {return this.editUserForm.get('firstName');}
   get lastName() {return this.editUserForm.get('lastName');}
@@ -82,7 +73,7 @@ export class EditUserComponent implements OnInit {
   get password() {return this.editUserForm.get('password');}
   get admin() {return this.editUserForm.get('admin');}
   get functions() {return this.editUserForm.get('functions');}
-  get projects() {return this.editUserForm.get('projects')}
+  get projectsOfUser() {return this.editUserForm.get('projectsOfUser')}
 
 
 

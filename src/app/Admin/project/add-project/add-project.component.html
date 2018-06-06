@@ -56,12 +56,12 @@
 
 					<li><br></li>
 
-					<li class="form-group"><label for="usersOnProject">user
-							Names: </label> <select [(ngModel)]="project.usersOnProject" id="usersOnProject"
-						formControlName="usersOnProject">
+					<li class="form-group"><label for="userList">user
+							Names: </label> <select [(ngModel)]="usersList.allUsers" id="userList"
+						formControlName="userList" size="3" multiple>
 							<option value="" disabled selected>select user for this project:</option>
-							<option *ngFor="let item of usersList.allUsers"
-								[value]="item">{{item.firstName}}</option>
+							<option *ngFor="let item of allUsersList.allUsers"
+								[ngValue]="item">{{item.firstName}}</option>
 					</select></li>
 
 					<li><br></li>

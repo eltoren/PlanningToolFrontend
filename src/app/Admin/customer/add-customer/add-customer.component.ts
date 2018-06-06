@@ -4,6 +4,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 import {Customers} from '../../../models/customers.model';
 import {ProjectsList} from '../../../models/ProjectsList.model';
+import {Projects} from "../../../models/projects.model";
 import {AddCustomersService} from './add-customers.service';
 
 @Component({
@@ -22,7 +23,8 @@ export class AddCustomerComponent implements OnInit {
 
   errorCustomersName: string;
 
-  projectList: ProjectsList = new ProjectsList;
+  allProjectList: ProjectsList = new ProjectsList;
+
 
   constructor(private router: Router, private addCustomersService: AddCustomersService) {}
 
@@ -32,15 +34,23 @@ export class AddCustomerComponent implements OnInit {
       'projectsOfCustomer': new FormControl(this.customer.projectsOfCustomer),
     });
 
-    this.addCustomersService.getProjects(this.projectList).subscribe(data => {
+    this.addCustomersService.getProjects(this.allProjectList).subscribe(data => {
       data.allProjects.forEach((projects) => {
-        this.projectList.allProjects.push(projects);
-      })
+        if (projects.ownerOfProject == null) {
+          
+           this.allProjectList.allProjects.push(projects);
+        }
+       
+      });
     });
   }
 
+
+
   addCustomer(): void {
-    this.addCustomersService.addCustomer(this.customer).subscribe(data => {alert('customer created')});
+    console.log(this.customer);
+    this.customer.projectsOfCustomer.forEach((project) => {project.ownerOfProject = this.customer})
+    this.addCustomersService.addCustomer(this.customer).subscribe(data => {console.log(data); alert('customer created')});
   }
 
   get customerName() {return this.addCustomersFrom.get('customerName');}

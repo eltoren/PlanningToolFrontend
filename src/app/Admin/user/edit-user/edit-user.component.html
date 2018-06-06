@@ -32,29 +32,27 @@
 			<fieldset>
 				<legend>select user</legend>
 				<ul>
-					<li class="form-group"><label for="userList">users:
-							</label> <select [(ngModel)]="tempUser" id="userList"
-						formControlName="userList">
-							<option value="" disabled selected>select a User</option>
+					<li class="form-group"><label for="user">
+							<br> select a user below:
+							</label> <select [(ngModel)]="user" id="user"
+						formControlName="user" autofocus="autofocus" > 
+							<option disabled="disabled">Users: </option>
 							<option *ngFor="let item of userList.allUsers"
-								[value]="item">{{item.username}}</option>
+								[ngValue]="item">{{item.username}}</option>
 					</select></li>
-					<li class="form-group"><input name="selectUser" id="selectUser"
-						type="submit" placeholder="Select this User"
-						(click)="getUser()">
-						<div class="fix"></div></li>
+					
 				</ul>
 			</fieldset>		
 		</form>
 		
-		<form id="editUserForm" [formGroup]="editUserForm" #formDir="ngForm">
-			<fieldset>
+		<form id="editUserForm" [formGroup]="editUserForm" #formDir="ngForm" >
+			<fieldset [hidden]="!user.id">
 				<legend>edit user</legend>
 				<ul>
 					<li class="form-group"><label for="firstName">User
 							first name:</label><br> <input [(ngModel)]="user.firstName"
 						type="text" name="firstName" id="firstName"
-						placeholder="firstName" formControlName="firstName" required>
+						placeholder="firstName" formControlName="firstName" required [value]="user.firstName">
 						<div
 							*ngIf="firstName.invalid && (firstName.dirty || firstName.touched)"
 							class="alert alert-danger">
@@ -67,7 +65,7 @@
 					<li class="form-group"><label for="lastName">User last
 							name:</label><br> <input [(ngModel)]="user.lastName" type="text"
 						name="lastName" id="lastName" placeholder="lastName"
-						formControlName="lastName" required>
+						formControlName="lastName" required [value]="user.lastName">
 						<div
 							*ngIf="lastName.invalid && (lastName.dirty || lastName.touched)"
 							class="alert alert-danger">
@@ -80,7 +78,7 @@
 					<li class="form-group"><label for="username">User
 							name:</label><br> <input [(ngModel)]="user.username" type="text"
 						name="username" id="username" placeholder="Username"
-						formControlName="username" required>
+						formControlName="username" required [value]="user.username">
 						<div
 							*ngIf="username.invalid && (username.dirty || username.touched)"
 							class="alert alert-danger">
@@ -92,8 +90,8 @@
 
 					<li class="form-group"><label for="password">Password:</label><br>
 						<input [(ngModel)]="user.password" type="password" name="password"
-						id="password" placeholder="Password" formControlName="password"
-						required>
+						id="password" formControlName="password"
+						required [value]="user.password" >
 						<div
 							*ngIf="password.invalid && (password.dirty || password.touched)"
 							class="alert alert-danger">
@@ -105,23 +103,25 @@
 
 					<li class="form-group"><label for="admin">admin:</label><br>
 						<input [(ngModel)]="user.admin" type="checkbox" name="admin"
-						id="admin" placeholder="admin" formControlName="admin"><br></li>
+						id="admin" placeholder="admin" formControlName="admin" [value]="user.admin" ><br></li>
 
 					<li><br></li>
 
 					<li class="form-group"><label for="functions">functions
 							:</label><br> <input [(ngModel)]="user.functions" type="text"
 						name="functions" id="functions" placeholder="functions"
-						formControlName="functions"></li>
+						formControlName="functions" [value]="user.functions"></li>
 
 					<li><br></li>
 
 					<li class="form-group"><label for="projectList">Project
-							Names: </label> <select [(ngModel)]="user.projects" id="projectList"
-						formControlName="projects">
+							Names: </label><label><span *ngFor="let item of user.projectsOfUser"
+								>{{item.projectName}}, </span></label> <select [(ngModel)]="user.projectsOfUser" id="projectList"
+						formControlName="projects" multiple size="3">
 							<option value="" disabled="disabled" selected="selected">select a project</option>
+
 							<option *ngFor="let item of projectList.allProjects"
-								[value]="item">{{item.projectName}}</option>
+								[ngValue]="item">{{item.projectName}}</option>
 					</select></li>
 
 					<li><br></li>

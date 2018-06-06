@@ -31,14 +31,14 @@
 			<fieldset>
 				<legend>Add customer</legend>
 				<ul>
-					<li class="form-group"><label for="customersName">customer
+					<li class="form-group"><label for="customerName">customer
 							name:</label><br> <input [(ngModel)]="customer.customerName"
 						type="text" name="customerName" id="customerName"
 						placeholder="customerName" formControlName="customerName" required>
 						<div
 							*ngIf="customerName.invalid && (customerName.dirty || customerName.touched)"
 							class="alert alert-danger">
-							<span style="color: red" *ngIf="customerName.errors.required">project
+							<span style="color: red" *ngIf="customerName.errors.required">Customers
 								name is required</span>
 						</div></li>
 
@@ -46,10 +46,11 @@
 
 					<li class="form-group"><label for="projectsOfCustomer">Project
 							Names: </label> <select [(ngModel)]="customer.projectsOfCustomer"
-						id="projectsOfCustomer" formControlName="projectsOfCustomer">
+						id="projectsOfCustomer" formControlName="projectsOfCustomer" size="3"
+						multiple>
 							<option value="" disabled selected>select a project</option>
-							<option *ngFor="let item of projectList.allProjects"
-								[value]="item">{{item.projectName}}</option>
+							<option *ngFor="let item of allProjectList.allProjects"
+								[ngValue]="item">{{item.projectName}}</option>
 					</select></li>
 
 					<li><br></li>

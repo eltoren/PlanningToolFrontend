@@ -4,6 +4,6 @@ export class Customers {
 
   id: number;
   customerName: string;
-  projectsOfCustomer: Array<Projects>;
+  projectsOfCustomer: Array<Projects> = new Array;
 
 }

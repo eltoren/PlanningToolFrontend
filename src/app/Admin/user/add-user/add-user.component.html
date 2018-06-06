@@ -96,12 +96,12 @@
 
 					<li><br></li>
 
-					<li class="form-group"><label for="projectList">Project
-							Names: </label> <select [(ngModel)]="user.projects" id="projectList"
-						formControlName="projects">
+					<li class="form-group"><label for="projectsOfUser">Project
+							Names: </label> <select [(ngModel)]="user.projectsOfUser"
+						id="projectsOfUser" formControlName="projects" multiple size="3">
 							<option value="" disabled selected>select a project</option>
 							<option *ngFor="let item of projectList.allProjects"
-								[value]="item">{{item.projectName}}</option>
+								[ngValue]="item">{{item.projectName}}</option>
 					</select></li>
 
 					<li><br></li>
