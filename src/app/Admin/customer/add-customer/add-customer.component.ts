@@ -38,7 +38,6 @@ export class AddCustomerComponent implements OnInit {
     this.addCustomersService.getProjects(this.projectList).subscribe(data => {
       data.allProjects.forEach((projects) => {
         if (projects.ownerOfProject == null) {
-
           this.projectList.allProjects.push(projects);
         }
 

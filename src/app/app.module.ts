@@ -20,6 +20,8 @@ import {UserOverviewComponent} from './Admin/user/user-overview/user-overview.co
 import {ProjectOverviewComponent} from './Admin/project/project-overview/project-overview.component';
 import {CustomersOverviewComponent} from './Admin/customer/customers-overview/customers-overview.component';
 import {EditUserComponent} from './Admin/user/edit-user/edit-user.component';
+import {EditCustomerComponent} from './Admin/customer/edit-customer/edit-customer.component';
+import {EditProjectComponent} from './Admin/project/edit-project/edit-project.component'
 
 
 import {LoginService} from './login/login/login.service';
@@ -28,7 +30,9 @@ import {OverviewService} from './overview/Overview.service';
 import {AddUserService} from './Admin/user/add-user/add-user.service'
 import {AddProjectsService} from './Admin/project/add-project/add-projects.service'
 import {AddCustomersService} from './Admin/customer/add-customer/add-customers.service';
-import {EditUserService} from './Admin/user/edit-user/edit-user.service'
+import {EditUserService} from './Admin/user/edit-user/edit-user.service';
+import {EditProjectService} from './Admin/project/edit-project/edit-project.service'
+import {EditCustomerService} from './Admin/customer/edit-customer/edit-customer.service'
 
 
 
@@ -49,6 +53,8 @@ import {EditUserService} from './Admin/user/edit-user/edit-user.service'
     ProjectOverviewComponent,
     CustomersOverviewComponent,
     EditUserComponent,
+    EditCustomerComponent,
+    EditProjectComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,8 +68,8 @@ import {EditUserService} from './Admin/user/edit-user/edit-user.service'
   providers: [LoginService,
     AdminloginService,
     OverviewService,
-    AddUserService, AddProjectsService, AddCustomersService, 
-    EditUserService,
+    AddUserService, AddProjectsService, AddCustomersService,
+    EditUserService, EditProjectService, EditCustomerService,
   ],
   bootstrap: [AppComponent]
 })

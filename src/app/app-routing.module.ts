@@ -15,6 +15,8 @@ import {UserOverviewComponent} from './Admin/user/user-overview/user-overview.co
 import {ProjectOverviewComponent} from './Admin/project/project-overview/project-overview.component';
 import {CustomersOverviewComponent} from './Admin/customer/customers-overview/customers-overview.component';
 import {EditUserComponent} from './Admin/user/edit-user/edit-user.component';
+import {EditProjectComponent} from './Admin/project/edit-project/edit-project.component'
+import {EditCustomerComponent} from './Admin/customer/edit-customer/edit-customer.component'
 
 
 const routes: Routes = [
@@ -59,12 +61,20 @@ const routes: Routes = [
     component: AddProjectComponent
   },
   {
+    path: 'adminOverview/adminProjectOverview/adminEditProject',
+    component: EditProjectComponent
+  },
+  {
     path: 'adminOverview/adminCustomerOverview',
     component: CustomersOverviewComponent
   },
   {
-    path: 'adminOverview/adminCustomerOverview/adminAddProject',
+    path: 'adminOverview/adminCustomerOverview/adminAddCustomer',
     component: AddCustomerComponent
+  },
+  {
+    path: 'adminOverview/adminCustomerOverview/adminEditCustomer',
+    component: EditCustomerComponent
   },
 ];
 

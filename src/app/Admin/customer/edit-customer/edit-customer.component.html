@@ -17,19 +17,38 @@
 					<li><a routerLink="">Home</a></li>
 					<li><a routerLink="/adminOverview">back</a></li>
 					<li><a routerLink="../">Overview</a></li>
-					<li><a class="active">Add Customer</a></li>
-					<li><a routerLink="../adminEditCustomer">Edit Customer</a></li>
+					<li><a routerLink="../adminAddCustomer">Add Customer</a></li>
+					<li><a class="active">Edit Customer</a></li>
 				</ul>
 			</nav>
 			<div class="fix"></div>
 		</header>
 
 		<main> <!-- content here --> <br>
-		<h2>Fill in the form below to add a new customer in system</h2>
+		<h2>Please select a customer below to edit it</h2>
 		<br>
-		<form id="addCustomersFrom" [formGroup]="addCustomersFrom"
+
+		<form id="selectCustomerForm" [formGroup]="selectCustomerForm"
 			#formDir="ngForm">
 			<fieldset>
+				<legend>select project</legend>
+				<ul>
+					<li class="form-group"><label for="customer"> <br>
+							select a customer below:
+					</label> <select [(ngModel)]="customer" id="customer"
+						formControlName="customer" autofocus="autofocus">
+							<option disabled="disabled">customers:</option>
+							<option *ngFor="let item of customersList.allCustomers"
+								[ngValue]="item">{{item.customerName}}</option>
+					</select></li>
+
+				</ul>
+			</fieldset>
+		</form>
+
+		<form id="editCustomerFrom" [formGroup]="editCustomerFrom"
+			#formDir="ngForm">
+			<fieldset [hidden]="!customer.id">
 				<legend>Add customer</legend>
 				<ul>
 					<li class="form-group"><label for="customerName">customer
@@ -46,9 +65,11 @@
 					<li><br></li>
 
 					<li class="form-group"><label for="projectsOfCustomer">Project
-							Names: </label> <select [(ngModel)]="customer.projectsOfCustomer"
-						id="projectsOfCustomer" formControlName="projectsOfCustomer" size="3"
-						multiple>
+							Names: </label><label><span
+							*ngFor="let item of customer.projectsOfCustomer">{{item.projectName}},
+						</span></label> <select [(ngModel)]="customer.projectsOfCustomer"
+						id="projectsOfCustomer" formControlName="projectsOfCustomer"
+						size="3" multiple>
 							<option value="" disabled selected>select a project</option>
 							<option *ngFor="let item of projectList.allProjects"
 								[ngValue]="item">{{item.projectName}}</option>
@@ -56,9 +77,10 @@
 
 					<li><br></li>
 
-					<li class="form-group"><input name="addCustomer"
-						id="addCustomer" type="submit" placeholder="Add new Customer"
-						[disabled]="addCustomersFrom.invalid" (click)="addCustomer()" onClick="history.go(0)">
+					<li class="form-group"><input name="editCustomer"
+						id="editCustomer" type="submit" placeholder="edit Customer"
+						[disabled]="editCustomerFrom.invalid"
+						(click)="saveEditedCustomer()" onClick="history.go(0)">
 						<div class="fix"></div></li>
 
 				</ul>

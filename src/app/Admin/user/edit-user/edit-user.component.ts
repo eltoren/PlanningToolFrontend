@@ -21,9 +21,7 @@ export class EditUserComponent implements OnInit {
   selectUserForm: FormGroup;
 
   user: Users = new Users();
-  tempUser: Users = new Users();
-  errorUsername: string;
-
+  
   projectList: ProjectsList = new ProjectsList;
   userList: UserList = new UserList;
 
@@ -38,6 +36,7 @@ export class EditUserComponent implements OnInit {
 
     this.editUserService.getUserList(this.userList).subscribe(data => {
       data.allUsers.forEach((user) => {
+        console.log(user)
         this.userList.allUsers.push(user);
       })
     });
@@ -61,7 +60,6 @@ export class EditUserComponent implements OnInit {
   }
 
   saveEditUser(): void {
-    console.log(this.user)
     this.editUserService.saveUser(this.user).subscribe(data => {alert('user edited')});
   }
 

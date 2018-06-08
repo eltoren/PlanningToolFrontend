@@ -25,7 +25,7 @@
 		</header>
 
 		<main> <!-- content here --> <br>
-		<h2>Please select a user below to edit him</h2>
+		<h2>Please select a user below to edit him/her</h2>
 		<br>
 		
 		<form id="selectUserForm" [formGroup]="selectUserForm" #formDir="ngForm">
@@ -114,7 +114,7 @@
 
 					<li><br></li>
 
-					<li class="form-group"><label for="projectList">Project
+					<li class="form-group"><label for="projectList">Projects
 							Names: </label><label><span *ngFor="let item of user.projectsOfUser"
 								>{{item.projectName}}, </span></label> <select [(ngModel)]="user.projectsOfUser" id="projectList"
 						formControlName="projects" multiple size="3">
